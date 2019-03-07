@@ -1,8 +1,10 @@
 package main
 
 import (
+  "fmt"
   "log"
   "net/http"
+  "os"
 )
 
 func getListenAddress() (string, error) {
@@ -17,7 +19,7 @@ func main() {
   fs := http.FileServer(http.Dir("static"))
   http.Handle("/", fs)
 
-  addr, err := determineListenAddress()
+  addr, err := getListenAddress()
   if err != nil {
     log.Fatal(err)
   }
