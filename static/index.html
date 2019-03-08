@@ -67,6 +67,7 @@
           <span class="card-title grey-text text-darken-4"><a href="https://github.com/uber/NullAway">NullAway</a></span>
           <p><i>A fast, practical, static nullness checker for Java</i></p><br />
           <p>NullAway takes in code following an intuitive annotation discipline, where values that might be <tt>null</tt> at runtime, must be annotated with <tt>@Nullable</tt>. It performs type-based local analysis to ensure that any pointer that gets dereferenced in annotated code cannot be <tt>null</tt>, and thus prevent <tt>NullPointerExceptions</tt> (<tt>NPE</tt>s). In our measurements, the build-time overhead of running NullAway is usually less than 20% of javac, which allows us to use it to analize all of Uber Android Java code on every local compilation.</p>
+	  <p><span style="font-weight:bold"/>with Manu Sridharan, Subarno Banerjee, and others at Uber</span></p>
         </div>
         <div class="card-action">
           <a href="https://github.com/uber/NullAway">Project Page</a>
@@ -80,6 +81,7 @@
           <p><i>A static analysis tool for preventing UI access off the main thread in stream-based (RxJava/RxAndroid) Android applications.</i></p><br />
           <p>The RxThreadEffectChecker is built on the <a href="https://checkerframework.org/">Checker Framework</a>, and particularly it works in tandem with their guieffect checker. It extends these checkers with awaraness of the ReactiveX stream-based threading model. We have deployed RxThreadEffectChecker at Uber and are working on a faster iteration of this tool, using the same type system.</p>
         </div>
+	<p><span style="font-weight:bold"/>with Benno Stein, Manu Sridharan, and others at Uber</span></p>
         <div class="card-action">
           <a href="https://github.com/uber-research/RxThreadEffectChecker">Project Page</a>
         </div>
