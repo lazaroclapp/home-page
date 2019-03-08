@@ -52,10 +52,54 @@
            </div>
 	</div>
         <div class="divider"></div><br/>
+  <div class="row" id="about">
+    <h5>About:</h5>
+    <div class="col s12">
+      I am a Senior Engineer at Uber's Programming Systems Group, where I work primarily on developing static analysis tools for Java applications. My current focus is on improving application reliability by preventing broad categories of bugs using fast type-system based tools that run on every local compilation, while minimizing developer annotation burden. My research interests more broadly include static and dynamic analysis, modeling of third-party code behavior, as well as automated test generation and UI exploration for mobile applications. Previous to Uber I got my Ph.D. in Computer Science from Stanford University under the direction of Prof. <a href="https://theory.stanford.edu/~aiken/"/>Alex Aiken</a>.
+      <!-- maybe link CV -->
+    </div>
+  </div>
+  <div class="row" id="projects">
+    <h5>Tools:</h5>
+    <div class="col s12 m6">
+      <div class="card hoverable">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4"><a href="https://github.com/uber/NullAway">NullAway</a></span>
+          <p><i>A fast, practical, static nullness checker for Java</i></p><br />
+          <p>NullAway takes in code following an intuitive annotation discipline, where values that might be <tt>null</tt> at runtime, must be annotated with <tt>@Nullable</tt>. It performs type-based local analysis to ensure that any pointer that gets dereferenced in annotated code cannot be <tt>null</tt>, and thus prevent <tt>NullPointerExceptions</tt> (<tt>NPE</tt>s). In our measurements, the build-time overhead of running NullAway is usually less than 20% of javac, which allows us to use it to analize all of Uber Android Java code on every local compilation.</p>
+        </div>
+        <div class="card-action">
+          <a href="https://github.com/uber/NullAway">Project Page</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="card hoverable">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4"><a href="https://github.com/uber-research/RxThreadEffectChecker">RxThreadEffectChecker</a></span>
+          <p><i>A static analysis tool for preventing UI access off the main thread in stream-based (RxJava/RxAndroid) Android applications.</i></p><br />
+          <p>The RxThreadEffectChecker is built on the <a href="https://checkerframework.org/">Checker Framework</a>, and particularly it works in tandem with their guieffect checker. It extends these checkers with awaraness of the ReactiveX stream-based threading model. We have deployed RxThreadEffectChecker at Uber and are working on a faster iteration of this tool, using the same type system.</p>
+        </div>
+        <div class="card-action">
+          <a href="https://github.com/uber-research/RxThreadEffectChecker">Project Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
 	<div class="row" id="papers">
-           <h5>Publications:</h5>
+           <h5>Research Publications:</h5>
 <!--           <div class="card hoverable small" style="max-height: 180px;"> -->
            <div class="col s12">
+            <div class="card hoverable">
+             <div class="card-content">
+                <span class="card-title grey-text text-darken-4"><a href="preprints/ase18-rxthreadchecker.pdf">Safe stream-based programming with refinement types</a></span>
+                <p><span style="font-weight:bold"/>Benno Stein, Lazaro Clapp, Manu Sridharan, Bor-Yuh Evan Chang</span><br/>
+                33rd ACM/IEEE International Conference on Automated Software Engineering, (<b>ASE</b>), 2018.</p>
+             </div>
+             <div class="card-action">
+              <a href="preprints/ase18-rxthreadchecker.pdf">PDF</a><a href="slides/ase2018_slides.pdf">Slides</a><a href="https://github.com/uber-research/RxThreadEffectChecker">Project Page</a>
+             </div>
+      </div>
             <div class="card hoverable">
              <div class="card-content">
                 <span class="card-title grey-text text-darken-4"><a href="https://arxiv.org/pdf/1711.03436.pdf">Eventually Sound Points-To Analysis with Missing Code</a></span>
