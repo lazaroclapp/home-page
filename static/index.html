@@ -1,4 +1,4 @@
-
+<!-- This is a simple, essentially static page, written for clarity circa 2017 [Content updated 2025]. No meaningful demonstration of frontend skills will be found here one way or the other. -->
 <!DOCTYPE html>
   <html>
     <head>
@@ -15,6 +15,11 @@
 
     .card-action a {
         float: right;
+    }
+    
+    #previously-at {
+        padding-left: 6em;
+        text-indent: -6em;
     }
      </style>
     </head>
@@ -42,12 +47,14 @@
            <div class="col s12 m9">
               <div style="margin-left:40px;"/>
               <h2>Lazaro Clapp</h2>
-              <h5>Uber Technologies Inc., Programming Systems Group</h5>
-              <h6><span>Previously @ </span>Stanford University, Computer Science Department (Ph.D. student)</h6>
+              <h5>Founding Engineer at Gitar.ai</h5>
+              <h6 id="previously-at">
+                <span>Previously @ </span>Uber Technologies Inc., Programming Systems Group, <br />Stanford University, Computer Science Department (Ph.D. student)
+              </h6>
               <div class="divider"></div>
               <!-- <p>Ph.D. student, working with Prof. <a href="https://theory.stanford.edu/~aiken/"/>Alex Aiken</a></p> -->
 	      <p><b>Interests:</b> Static and Dynamic Program Analysis, Automated Software Testing, Security</p>
-	      <p><b>Email:</b> lazaro@uber.com </p>
+	      <p><b>Email:</b> lazaro.clapp@gmail.com</p>
               </div>
            </div>
 	</div>
@@ -55,19 +62,21 @@
   <div class="row" id="about">
     <h5>About:</h5>
     <div class="col s12">
-      I am a Senior Engineer at Uber's Programming Systems Group, where I work primarily on developing static analysis tools for Java applications. My current focus is on improving application reliability by preventing broad categories of bugs using fast type-system based tools that run on every local compilation, while minimizing developer annotation burden. My research interests more broadly include static and dynamic analysis, modeling of third-party code behavior, as well as automated test generation and UI exploration for mobile applications. Previous to Uber I got my Ph.D. in Computer Science from Stanford University under the direction of Prof. <a href="https://theory.stanford.edu/~aiken/"/>Alex Aiken</a>.
+      <p>I am a Founding Engineer at <a href="https://gitar.ai"/>Gitar.ai</a>, working on automating large scale code maintenance and CI fixes by combining custom AI agents and specialized cross-language program analysis tooling.</p>
+      <p>Before that I was a Staff Engineer and Tech Lead and Manager within Uber's Programming Systems Group. I am a core developer and maintainer for <a href="https://github.com/uber/NullAway">NullAway</a>, a compile-time tool to prevent Java NPEs in pratice, which has been adopted semi-broadly in industry. It is used by <a href="https://github.com/chromium/chromium/blob/aca14ee9775f2052a2b7e9cf9f292ea1a953e09f/styleguide/java/nullaway.md?plain=1#L3">Chromium</a> and <a href="https://spring.io/blog/2025/03/10/null-safety-in-spring-apps-with-jspecify-and-null-away">Apache Spring</a>, among other major OSS projects.</p>
+      <p>I am generally interested in building best in class developer tooling, particularly with a focus on increasing reliability via static and dynamic analysis, and automating transformations. I got my Ph.D. in Computer Science from Stanford University under the direction of Prof. <a href="https://theory.stanford.edu/~aiken/"/>Alex Aiken</a>.</p>
       <!-- maybe link CV -->
     </div>
   </div>
   <div class="row" id="projects">
-    <h5>Tools:</h5>
+    <h5>Open-Source Tools:</h5>
     <div class="col s12 m6">
       <div class="card hoverable">
         <div class="card-content">
           <span class="card-title grey-text text-darken-4"><a href="https://github.com/uber/NullAway">NullAway</a></span>
           <p><i>A fast, practical, static nullness checker for Java</i></p><br />
           <p>NullAway takes in code following an intuitive annotation discipline, where values that might be <tt>null</tt> at runtime, must be annotated with <tt>@Nullable</tt>. It performs type-based local analysis to ensure that any pointer that gets dereferenced in annotated code cannot be <tt>null</tt>, and thus prevent <tt>NullPointerExceptions</tt> (<tt>NPE</tt>s). In our measurements, the build-time overhead of running NullAway is usually less than 20% of javac, which allows us to use it to analize all of Uber Android Java code on every local compilation.</p><br />
-	  <p><span style="font-weight:bold;font-size:smaller"/>with Manu Sridharan, Subarno Banerjee, and others at Uber</span></p>
+	  <p><span style="font-weight:bold;font-size:smaller"/>with Manu Sridharan, Subarno Banerjee, Nima Karimipour, and others at Uber</span></p>
         </div>
         <div class="card-action">
           <a href="https://github.com/uber/NullAway">Project Page</a>
@@ -77,9 +86,35 @@
     <div class="col s12 m6">
       <div class="card hoverable">
         <div class="card-content">
+          <span class="card-title grey-text text-darken-4"><a href="https://github.com/uber-go/nilaway">NilAway</a></span>
+          <p><i>A fast nilness analyzer for Go requiring no code annotations</i></p><br />
+          <p>NilAway builds upon the lessons of NullAway to build a fast nil dereference checker for Go, which works across packages without requiring any code anotations on functions or fields. It manages this by performing whole-program nilability type inference, modeled as graph reachability. It handles language features like struct initialization, error returns, and contracts between function parameters. It leverages integration with the Bazel build system and nogo to scale to 90+M LoC with minimal overhead over compilation.</p><br />
+	  <p><span style="font-weight:bold;font-size:smaller"/>I led this project, which means most of the real work is to be credited to Sonal Mahajan, Julia Turcotti, Yuxing Wang and many others at Uber</span></p>
+        </div>
+        <div class="card-action">
+          <a href="https://github.com/uber-go/nilaway">Project Page</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="card hoverable">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4"><a href="https://github.com/uber/piranha">Piranha</a></span>
+          <p><i>A polyglot code transformation toolset for automating large scale changes</i></p><br />
+          <p>Piranha began as an automated cross-paltform tool to eliminate stale feature flags in Uber's codebase and related dead code, with three separate language-specific implementations. The current version of the tool is a polyglot (cross-language) code transformation framework built on top of the tree-sitter parsing infrastructure. It provides a lightweight, yet surprisingly flexible, DSL for cascading code transformations.</p><br />
+	  <p><span style="font-weight:bold;font-size:smaller"/>with Ameya Ketkar, Murali Krishna Ramanathan, and others at Uber</span></p>
+        </div>
+        <div class="card-action">
+          <a href="https://github.com/uber/piranha">Project Page</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="card hoverable">
+        <div class="card-content">
           <span class="card-title grey-text text-darken-4"><a href="https://github.com/uber-research/RxThreadEffectChecker">RxThreadEffectChecker</a></span>
           <p><i>A static analysis tool for preventing UI access off the main thread in stream-based (RxJava/RxAndroid) Android applications.</i></p><br />
-          <p>The RxThreadEffectChecker is built on the <a href="https://checkerframework.org/">Checker Framework</a>, and particularly it works in tandem with their guieffect checker. It extends these checkers with awaraness of the ReactiveX stream-based threading model. We have deployed RxThreadEffectChecker at Uber and are working on a faster iteration of this tool, using the same type system.</p><br />
+          <p>The RxThreadEffectChecker is built on the <a href="https://checkerframework.org/">Checker Framework</a>, and particularly it works in tandem with their guieffect checker. It extends these checkers with awaraness of the ReactiveX stream-based threading model. We deployed RxThreadEffectChecker at Uber, then later replaced it with a faster (but regrettably not open-source) implementation, using the same type system directly atop the Error Prone framework.</p><br />
           <p><span style="font-weight:bold;font-size:smaller"/>with Benno Stein, Manu Sridharan, and others at Uber</span></p>
 	</div>
         <div class="card-action">
@@ -93,6 +128,46 @@
            <div class="col s12">
             <div class="card hoverable">
              <div class="card-content">
+                <span class="card-title grey-text text-darken-4"><a href="open-access-papers/polyglot-piranha.pdf">A Lightweight Polyglot Code Transformation Language</a></span>
+                <p><span style="font-weight:bold"/>Ameya Ketkar, Daniel Ramos, Lazaro Clapp, Raj Barik, Murali Krishna Ramanathan</span><br/>
+                45th ACM SIGPLAN Conference on Programming Language Design and Implementation (<b>PLDI</b>), 2024.</p>
+             </div>
+             <div class="card-action">
+              <a href="open-access-papers/polyglot-piranha.pdf">PDF</a><a href="https://github.com/uber/piranha">Project Page</a>
+             </div>
+            </div>
+            <div class="card hoverable">
+             <div class="card-content">
+                <span class="card-title grey-text text-darken-4"><a href="open-access-papers/nullaway-annotator.pdf">Practical Inference of Nullability Types</a></span>
+                <p><span style="font-weight:bold"/>Nima Karimipour, Justin Pham, Lazaro Clapp, Manu Sridharan</span><br/>
+                31st ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (<b>ESEC</b>/<b>FSE</b>), 2023.</p>
+             </div>
+             <div class="card-action">
+              <a href="open-access-papers/nullaway-annotator.pdf">PDF</a><a href="https://github.com/uber/piranha">Project Page</a>
+             </div>
+            </div>
+            <div class="card hoverable">
+             <div class="card-content">
+                <span class="card-title grey-text text-darken-4"><a href="open-access-papers/last-diff-analyzer.pdf">Last Diff Analyzer: Multi-language Automated Approver for Behavior-Preserving Code Revisions</a></span>
+                <p><span style="font-weight:bold"/>Yuxin Wang, Adam Welc, Lazaro Clapp, Lingchao Chen</span><br/>
+                31st ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (<b>ESEC</b>/<b>FSE</b>), 2023.</p>
+             </div>
+             <div class="card-action">
+              <a href="open-access-papers/last-diff-analyzer.pdf">PDF</a><a href="https://github.com/uber/piranha">Project Page</a>
+             </div>
+            </div>
+            <div class="card hoverable">
+             <div class="card-content">
+                <span class="card-title grey-text text-darken-4"><a href="preprints/ICSE20-SEIP-Piranha.pdf">Piranha: Reducing Feature Flag Debt at Uber</a></span>
+                <p><span style="font-weight:bold"/>Murali Krishna Ramanathan, Lazaro Clapp, Rajkishore Barik, Manu Sridharan</span><br/>
+                42nd International Conference on Software Engineering, Software Engineering in Practice (<b>ICSE-SEIP</b>), 2020.</p>
+             </div>
+             <div class="card-action">
+              <a href="preprints/ICSE20-SEIP-Piranha.pdf">PDF</a><a href="https://github.com/uber/piranha">Project Page</a>
+             </div>
+            </div>
+            <div class="card hoverable">
+             <div class="card-content">
                 <span class="card-title grey-text text-darken-4"><a href="preprints/fse19-nullaway.pdf">NullAway: Practical Type-Based Null Safety for Java</a></span>
                 <p><span style="font-weight:bold"/>Subarno Banerjee, Lazaro Clapp, Manu Sridharan</span><br/>
                 27th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (<b>ESEC</b>/<b>FSE</b>), 2019.</p>
@@ -100,7 +175,7 @@
              <div class="card-action">
               <a href="preprints/fse19-nullaway.pdf">PDF</a><a href="https://doi.org/10.5281/zenodo.3267950">Artifact Evaluation Data</a><a href="https://github.com/uber/NullAway">Project Page</a>
              </div>
-           </div>
+            </div>
             <div class="card hoverable">
              <div class="card-content">
                 <span class="card-title grey-text text-darken-4"><a href="preprints/ase18-rxthreadchecker.pdf">Safe stream-based programming with refinement types</a></span>
@@ -113,12 +188,12 @@
       </div>
             <div class="card hoverable">
              <div class="card-content">
-                <span class="card-title grey-text text-darken-4"><a href="https://arxiv.org/pdf/1711.03436.pdf">Eventually Sound Points-To Analysis with Missing Code</a></span>
-                <p><span style="font-weight:bold"/>Osbert Bastani, Lazaro Clapp, Saswat Anand, Rahul Sharma, Alex Aiken</span><br/>
-                In submission.</p>
+                <span class="card-title grey-text text-darken-4"><a href="http://theory.stanford.edu/~aiken/publications/papers/ecoop19.pdf">Eventually Sound Points-To Analysis with Specifications</a></span>
+                <p><span style="font-weight:bold"/>Osbert Bastani, Rahul Sharma, Lazaro Clapp, Saswat Anand, Alex Aiken</span><br/>
+                33rd European Conference on Object-Oriented Programming (<b>ECOOP</b>} 2019.</p>
              </div>
              <div class="card-action">
-              <a href="https://arxiv.org/pdf/1711.03436.pdf">PDF</a>
+              <a href="preprints/ecoop19.pdf">PDF</a>
              </div>
 	    </div>
 	    <div class="card hoverable">
